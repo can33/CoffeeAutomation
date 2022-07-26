@@ -1,0 +1,66 @@
+﻿@using CoffeeAutomation.Models.TableVMs
+@model TableVm
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="row">
+                        @foreach (var table in Model.Tables)
+                        {
+                            <div class="col-md-3 mb-4">
+                                <div class="card">
+                                    <div class="card-header mx-4 p-3 text-center">
+                                        <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+                                            <i class="material-icons opacity-10">account_balance</i>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0 p-3 text-center">
+
+                                        <h6 class="text-center mb-0">@table.Name</h6>
+                                        @*<span class="text-xs">masa detayları</span>*@
+                                        <a id="onClickOrder" asp-controller="Table" asp-action="GetOrderByTable" asp-route-id="@table.Id" class="bg-primary">
+                                            <div>
+                                                <hr class="horizontal dark my-3">
+
+                                                <p id="colorOrder" class="mb-0 text-success text-md font-weight-bolder">Sipariş detayları</p>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fixed-plugin">
+    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2 ">
+        <i class="material-icons py-2">settings</i>
+    </a>
+    <div class="card shadow-lg">
+        <hr class="horizontal dark my-1">
+        <div class="card-body pt-sm-3 pt-0">
+            <div class="float-end mt-4">
+                <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+
+            <form asp-controller="Table" asp-action="CreateTable" method="post">
+
+                <h4 class="text-bold">Masa Ekle</h4>
+                <hr />
+                <div class="mb-3">
+                    <label asp-for="@Model.Table.Name" class="form-label text-primary">Masa Adı</label>
+                    <input asp-for="@Model.Table.Name" required type="text" class="form-control bg-light p-1">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Masa Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>

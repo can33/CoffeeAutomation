@@ -1,0 +1,24 @@
+﻿@model CategoryUpdateVm
+
+<form asp-controller="Category" asp-action="EditCategory" method="post">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-bold mt-2 p-3">Kategori Düzenle</h4>
+        </div>
+        <hr />
+        <div class="card-body">
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label text-primary">Kategori Adı</label>
+                <input required type="text" asp-for="@Model.Name" class="form-control bg-light">
+                <span class="bg-primary text-white mt-1" asp-validation-for="@Model.Name"></span>
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+        </div>
+    </div>
+
+</form>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

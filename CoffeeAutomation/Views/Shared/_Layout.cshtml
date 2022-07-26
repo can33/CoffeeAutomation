@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+<partial name="_headPartial"/>
+
+<body class="g-sidenav-show  bg-gray-200">
+    <partial name="_sidenavPartial"/>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <partial name="_navbarPartial" />
+        @RenderBody()
+    </main>
+    @*<partial name="_pluginPartial"/>*@
+<partial name="_scriptPartial"/>
+</body>
+
+</html>

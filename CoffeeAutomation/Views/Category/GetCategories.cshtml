@@ -1,0 +1,97 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model CategoryVm
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Kategori Tablosu</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori Adı</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aktif Mi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="~/material-dashboard-master/assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@item.Name</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs text-secondary mb-0">Aktif</p>
+                                        </td>
+                                        <td class="d-flex justify-content-end m-2">
+                                            <a asp-action="EditCategory" asp-controller="Category" asp-route-id="@item.Id" class="btn btn-warning me-1">Güncelleme</a>
+                                            <a asp-action="DeleteCategory" asp-controller="Category" asp-route-id="@item.Id" onclick="return confirm('Silmek istediğinize emin misiniz ?')" class="btn btn-danger">Sil</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <div class="mt-2" style="margin-left:40%">
+                            @Html.PagedListPager(Model.Categories, page => Url.Action("GetCategories",
+                            new { page = page }),
+                            new PagedListRenderOptions
+                            {
+                            DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                            DisplayLinkToNextPage=PagedListDisplayMode.Never,
+                            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+                            LiElementClasses = new string[] { "page-item" },
+                            PageClasses = new string[] { "page-link" }
+                            })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-plugin">
+    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2 ">
+        <i class="material-icons py-2">settings</i>
+    </a>
+    <div class="card shadow-lg">
+        <hr class="horizontal dark my-1">
+        <div class="card-body pt-sm-3 pt-0">
+            <div class="float-end mt-4">
+                <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+
+            <form asp-action="CreateCategory" asp-controller="Category" method="post">
+
+                <h4 class="text-bold">Ürün Ekle</h4>
+                <hr />
+                <div class="mb-3">
+                    <label asp-for="@Model.Category.Name" class="form-label text-primary">Ürün Adı</label>
+                    <input required type="text" asp-for="@Model.Category.Name" class="form-control bg-light p-1">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Ürün Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>
+

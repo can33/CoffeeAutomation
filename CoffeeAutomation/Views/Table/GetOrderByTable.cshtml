@@ -1,0 +1,101 @@
+﻿@using CoffeeAutomation.Models.OrderVMs
+@model OrderCreateVm
+@{
+    decimal total = 0;
+    decimal totalCount = 0;
+}
+
+
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">@ViewBag.TableName Siparişleri</h6>
+                    </div>
+
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ürün</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tarih</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Miktar</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fiyat(₺)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="~/material-dashboard-master/assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@item.Product.Name</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@item.CreatedDate</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@item.Amount</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        @{
+                                                            total = @item.Amount * @item.Product.Price;
+                                                            totalCount = total + totalCount;
+                                                        } @total ₺
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <div class="card font-weight-bold float-end mt-2 me-2 p-2"
+                        <p>
+                                @*@{
+                                    totalCount = total + totalCount;
+                                    }*@
+                                Toplam Fiyat :<span class="text-danger"> @totalCount ₺</span>
+                        <form asp-controller="Table" asp-action="RemoveAllOrder" method="post">
+
+                            <button class="btn btn-outline-success" id="btnPay" type="submit"> YAP</button>
+                        </form>
+                            </p>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $('#btnPay').click(function(){
+            swal("Başarıyla Ödendi!", "Butona tıklayınız", "success",{button:"Kapat"},);
+        });        
+</script>

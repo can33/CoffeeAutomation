@@ -1,0 +1,43 @@
+﻿@using CoffeeAutomation.Models.ProductVMs
+@model ProductUpdateVm
+
+
+<form asp-controller="Product" asp-action="EditProduct" method="post">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-bold mt-2 p-3">Ürün Düzenle</h4>
+        </div>
+        <hr />
+        <div class="card-body">
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label text-primary">Ürün Adı</label>
+                <input type="text" asp-for="@Model.Name" class="form-control bg-light">
+
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Stock" class="form-label text-primary">Stok Adeti</label>
+                <input type="text" asp-for="@Model.Stock" class="form-control bg-light">
+
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Price" class="form-label text-primary">Fiyat(₺)</label>
+                <input type="text" asp-for="@Model.Price" class="form-control bg-light">
+
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="@Model.CategoryId" class="text-primary ">Kategori</label>
+                <select asp-for="@Model.CategoryId"
+                        class="form-control bg-light" asp-items="ViewBag.categoriesList">
+                </select>
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+        </div>
+    </div>
+
+</form>

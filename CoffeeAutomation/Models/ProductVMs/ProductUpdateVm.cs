@@ -1,0 +1,15 @@
+﻿using CoffeeAutomation.Entities;
+
+namespace CoffeeAutomation.Models.ProductVMs
+{
+    public class ProductUpdateVm
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Stock { get; set; }
+        public decimal Price { get; set; }
+
+        public virtual int CategoryId { get; set; }
+        public Category Category { get; set; }
+    }
+}
